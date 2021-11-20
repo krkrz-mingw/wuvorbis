@@ -9,6 +9,10 @@
 *.user
 *.res
 *.sbr
-*.VC.db
-*.cache
 .vs/
+*.dll
+*.o
+*.7z
+*.dep.make
+build-*/
+

@@ -20,7 +20,7 @@ extern "C" {
 
 #define EXPORT(hr) extern "C" __declspec(dllexport) hr __stdcall
 
-#include "tvpsnd.h" // TSS sound system interface definitions
+#include <tvpsnd.h> // TSS sound system interface definitions
 
 static bool FloatExtraction = false; // true if output format is IEEE 32-bit float
 
@@ -562,7 +562,6 @@ static void InternalSetCPUType(tjs_uint32 cputype)
 //---------------------------------------------------------------------------
 EXPORT(HRESULT) V2Link(iTVPFunctionExporter *exporter)
 {
-	fprintf(stderr, "WUVorbis Got V2Link!!\n");
 #ifndef NOT_HAVE_TP_STUB
 	// exported function, only called by kirikiri ver 2+
 	TVPAlive = true;
