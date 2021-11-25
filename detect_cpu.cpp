@@ -11,6 +11,7 @@
 
 #include <cstring>
 #include <windows.h>
+#if defined(_M_IX86) || defined(_M_AMD64) || defined(_M_X64)
 #include <x86intrin.h>
 
 #ifdef _MSC_VER
@@ -40,6 +41,7 @@ static inline int __cpuidex(int CPUInfo[4],int InfoType,int ECXValue) {
   return highest;
 }
 #endif
+#endif
 
 #ifndef NOT_HAVE_TP_STUB
 #include "tp_stub.h"
@@ -55,6 +57,7 @@ tjs_uint32 TVPCPUPhysicalCore;
 extern tjs_uint32 TVPCPUType;
 }
 
+#if defined(_M_IX86) || defined(_M_AMD64) || defined(_M_X64)
 static void GetCpuid( int op, int& eax, int& ebx, int& ecx, int& edx) {
 	int info[4] = {0,0,0,0};
 	__cpuid( info, op );
@@ -181,6 +184,7 @@ static void GetCPUName() {
 		name[11] = edx;
 	}
 }
+#endif
 //---------------------------------------------------------------------------
 // TVPCheckCPU
 //---------------------------------------------------------------------------
@@ -191,6 +195,7 @@ tjs_uint32 TVPCheckCPU()
 	memset( TVPCPUVendor, 0, sizeof(TVPCPUVendor) );
 	memset( TVPCPUName, 0, sizeof(TVPCPUName) );
 
+#if defined(_M_IX86) || defined(_M_AMD64) || defined(_M_X64)
 	int maxCpuId = 0;
 	int vendor = GetCpuVendor( maxCpuId );
 
@@ -271,6 +276,9 @@ tjs_uint32 TVPCheckCPU()
 
 	TVPCPUFeatures = flags | vendor;
 	return flags;
+#else
+	return 0;
+#endif
 }
 
 /*

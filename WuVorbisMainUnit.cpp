@@ -574,7 +574,7 @@ EXPORT(HRESULT) V2Link(iTVPFunctionExporter *exporter)
 
 	ttstr debug_str(L"wuvorbis:");
 	
-#ifndef _M_X64
+#ifdef _M_IX86
 	if(CPU_SSE) debug_str += L" SSE enabled."; else debug_str += L" SSE disabled.";
 	if(CPU_MMX) debug_str += L" MMX enabled."; else debug_str += L" MMX disabled.";
 	if(CPU_3DN) debug_str += L" 3DNow! enabled."; else debug_str += L" 3DNow! disabled.";
